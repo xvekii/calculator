@@ -1,0 +1,11 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+.main-container {
+  min-height: 45vh;
+  max-width: 240px;
+  border: 4px solid rgba(7, 59, 76, 0.13);
+  margin: 150px auto;
+  border-radius: 15px;
+}
