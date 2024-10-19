@@ -35,9 +35,13 @@
 }
 
 button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 46px;
   height: 46px;
   border-radius: 6px;
-  font-family: 'Inter', 'Helvetica', sans-serif;
-  font-weight: bold; 
+  font-family: Arial, Monospace, sans-serif;
+  font-weight: bold;
+  font-size: 1.3rem;
 }
