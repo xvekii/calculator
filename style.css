@@ -3,18 +3,18 @@
 }
 
 .main-container {
-  min-height: 358px;
-  max-width: 225px;
-  border: 3px solid rgb(7 59 76 / 8%);
+  min-height: 452px;
+  max-width: 306px;
+  border: 3px solid rgba(7, 59, 76, 0.08);
   margin: 150px auto;
   border-radius: 15px;
-  box-shadow: 1px 1px #00000030;
+  box-shadow: rgba(0, 0, 0, 0.19) 1px 1px;
   min-width: 225px;
 }
 
 .screen-container {
   max-width: 92%;
-  height: 60px;
+  height: 72px;
   border-radius: 6px;
   margin: 15px auto;
   background: rgb(199 242 255);
@@ -41,11 +41,11 @@ button {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 46px;
-  height: 46px;
+  width: 64px;
+  height: 62px;
   border-radius: 6px;
   font-family: "Source Sans Pro","Open sans", monospace, Arial;
-  font-size: 1.1rem;
+  font-size: 1.4rem;
   color: rgba(0, 0, 0, 0.66);
   background: #eae7e780;
   border: none;
