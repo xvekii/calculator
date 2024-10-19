@@ -41,7 +41,7 @@ button {
   width: 46px;
   height: 46px;
   border-radius: 6px;
-  font-family: Arial, Monospace, sans-serif;
+  font-family: math, monospace, Arial;
   font-weight: bold;
-  font-size: 1.3rem;
+  font-size: 1.2rem;
 }
