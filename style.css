@@ -9,3 +9,11 @@
   margin: 150px auto;
   border-radius: 15px;
 }
+
+.screen-container {
+  max-width: 90%;
+  height: 60px;
+  border: 4px solid rgba(7, 59, 76, 0.13);
+  border-radius: 6px;
+  margin: 15px auto;
+}
