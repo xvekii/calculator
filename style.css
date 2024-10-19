@@ -38,4 +38,6 @@ button {
   width: 46px;
   height: 46px;
   border-radius: 6px;
+  font-family: 'Inter', 'Helvetica', sans-serif;
+  font-weight: bold; 
 }
