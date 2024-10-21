@@ -3,19 +3,19 @@
 }
 
 .main-container {
-  min-height: 452px;
+  min-height: 470px;
   max-width: 306px;
   border: 3px solid rgba(7, 59, 76, 0.08);
   margin: 150px auto;
   border-radius: 15px;
-  box-shadow: rgba(0, 0, 0, 0.19) 1px 1px;
+  box-shadow: 2px 2px #b3b3b3;
   min-width: 225px;
   background: #2e373f;
 }
 
 .screen-container {
   max-width: 92%;
-  height: 72px;
+  height: 88px;
   border-radius: 6px;
   margin: 15px auto;
   background: rgb(223 226 227);
