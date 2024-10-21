@@ -1,5 +1,6 @@
 const btns = document.querySelectorAll("button");
-const funcBtns = document.querySelectorAll(".funct-btn")
+const funcBtns = document.querySelectorAll(".funct-btn");
+let funcBtnsEnabled = false;
 
 const inputs = {
   operator: null,
@@ -38,9 +39,10 @@ funcBtns.forEach(btn => {
   btn.disabled = true; 
 });
 
-function enableFuncBtns() {
+function toggleFuncBtns(enable) {
+  funcBtnsEnabled = enable;
   funcBtns.forEach(btn => {
-    btn.disabled = false; 
+    btn.disabled = !enable; 
   });
 }
 
@@ -48,6 +50,7 @@ btns.forEach(function(e) {
   e.addEventListener("click", (event) => {
     // If class of the button is a number, then store in a variable
     if (e.classList.contains("num")) {
+      toggleFuncBtns(true);
       // Concat numbers into array else block function btns
       // Before clicking the operator keep concat numbers - function?
       
@@ -57,7 +60,7 @@ btns.forEach(function(e) {
       // If operator is clicked, store into inputs.firstNumber
       // After clicking operator, update first number
       // After clicking = or * / etc., store second number
-    } else if (e.classList.contains("funct-btn")) {
+    } else if (e.classList.contains("funct-btn") && funcBtnsEnabled == true) {
       inputs.firstNumber = Number(temp.num1Arr.join(""));
       console.log(inputs.firstNumber);
       console.log(typeof inputs.firstNumber);
