@@ -14,12 +14,21 @@
 }
 
 .screen-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
   max-width: 92%;
   height: 88px;
   border-radius: 6px;
   margin: 15px auto;
   background: rgb(223 226 227);
   box-shadow: 2px 2px #b3b3b3;
+}
+
+.result-span {
+  font-family: "Source Sans Pro", "Open sans", monospace, Arial;
+  font-size: 3.5rem;
+  color: rgb(0 0 0);
 }
 
 .buttons-main-container {
