@@ -1,4 +1,5 @@
 const btns = document.querySelectorAll("button");
+const funcBtns = document.querySelectorAll(".funct-btn")
 
 const inputs = {
   operator: null,
@@ -32,6 +33,16 @@ function operate(operator, firstNum, secondNum) {
   // Calls one of the above functions on the numbers
 }
 
+
+funcBtns.forEach(btn => {
+  btn.disabled = true; 
+});
+
+function enableFuncBtns() {
+  funcBtns.forEach(btn => {
+    btn.disabled = false; 
+  });
+}
 
 btns.forEach(function(e) {
   e.addEventListener("click", (event) => {
