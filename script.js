@@ -1,5 +1,7 @@
 const btns = document.querySelectorAll("button");
 const funcBtns = document.querySelectorAll(".funct-btn");
+let resultSpan = document.querySelector(".result-span");
+
 let funcBtnsEnabled = false;
 
 const inputs = {
@@ -54,14 +56,16 @@ btns.forEach(function(e) {
       // Concat numbers into array else block function btns
       // Before clicking the operator keep concat numbers - function?
       
+      // Temporarily store first number digits and show them on the screen
       temp.num1Arr.push(event.target.textContent);
+      resultSpan.textContent = Number(temp.num1Arr.join(""));
       console.log(temp.num1Arr);
       
       // If operator is clicked, store into inputs.firstNumber
       // After clicking operator, update first number
       // After clicking = or * / etc., store second number
     } else if (e.classList.contains("funct-btn") && funcBtnsEnabled == true) {
-      inputs.firstNumber = Number(temp.num1Arr.join(""));
+      
       console.log(inputs.firstNumber);
       console.log(typeof inputs.firstNumber);
     }
