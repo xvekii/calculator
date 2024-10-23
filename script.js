@@ -58,7 +58,7 @@ btns.forEach(function(e) {
       
       // Temporarily store first number digits and show them on the screen
       temp.num1Arr.push(event.target.textContent);
-      resultSpan.textContent = Number(temp.num1Arr.join(""));
+      resultSpan.textContent = temp.num1Arr.join("");
       console.log(temp.num1Arr);
       
       // If operator is clicked, store into inputs.firstNumber
