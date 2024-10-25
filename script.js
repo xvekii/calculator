@@ -57,7 +57,12 @@ btns.forEach(function(e) {
       
       // Temporarily store first number digits and show them on the screen
       temp.num1Arr.push(event.target.textContent);
-      
+
+      // Make sure . can't be used twice in a number
+      if (event.target.textContent === ".") {
+        decimalBtn.disabled = true;
+      }
+
       if (temp.num1Arr[0] === ".") {
         temp.num1Arr.unshift("0");
         decimalBtn.disabled = true;
