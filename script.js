@@ -2,6 +2,7 @@ const btns = document.querySelectorAll("button");
 const funcBtns = document.querySelectorAll(".funct-btn");
 let resultSpan = document.querySelector(".result-span");
 const decimalBtn = document.querySelector(".decimal");
+const acBtn = document.querySelector(".ac-btn");
 
 let funcBtnsEnabled = false;
 
@@ -9,11 +10,27 @@ const inputs = {
   operator: null,
   firstNumber: null,
   secondNumber: null,
+
+  clear() {
+    for (const key in this) {
+      if (typeof this[key] !== "function") {
+        this[key] = null;
+      }
+    }
+  }
 }
 
 const temp = {
   num1Arr: [],
   num2Arr: [], 
+
+  clear() {
+    for (const key in this) {
+      if (Array.isArray(this[key])) {
+        this[key] = [];
+      }
+    }
+  }
 }
 
 
@@ -37,6 +54,12 @@ function operate(operator, firstNum, secondNum) {
   // Calls one of the above functions on the numbers
 }
 
+
+acBtn.addEventListener("click", () => {
+  inputs.clear();
+  temp.clear();
+  resultSpan.textContent = "0";
+});
 
 funcBtns.forEach(btn => {
   btn.disabled = true; 
