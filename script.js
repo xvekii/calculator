@@ -107,14 +107,20 @@ btns.forEach(function(e) {
       // After clicking operator, update first number
       // After clicking = or * / etc., store second number
     } else if (e.classList.contains("funct-btn") && funcBtnsEnabled == true) {
+      inputs.operator = event.target.textContent;
+      inputs.firstNumber = temp.num1Arr.join("");
+      temp.num1Arr = [];
       
-      console.log(inputs.firstNumber);
-      console.log(typeof inputs.firstNumber);
+      resultSpan.textContent = inputs.firstNumber + inputs.operator;
+      funcBtnsEnabled = false;
+      
+      console.log(event.target.textContent);
     }
-    
 
-    // inputs.firstNumber = event.target.textContent;
-    // console.log(inputs.firstNumber);
-    // console.log(inputs);
+  if (e.classList.contains("num") && inputs.firstNumber !== null) {
+      temp.num2Arr.push(event.target.textContent);
+      resultSpan.textContent = inputs.firstNumber + inputs.operator + temp.num2Arr.join("");
+  }
+    
   });
 });
