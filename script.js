@@ -59,6 +59,7 @@ acBtn.addEventListener("click", () => {
   inputs.clear();
   temp.clear();
   resultSpan.textContent = "0";
+  decimalBtn.disabled = false;
 });
 
 funcBtns.forEach(btn => {
@@ -94,6 +95,11 @@ btns.forEach(function(e) {
       if (temp.num1Arr[0] === "0" && temp.num1Arr[1] === "0") {
         temp.num1Arr.pop();
       }
+
+      if (temp.num1Arr.length == 2 && temp.num1Arr[0] === "0") {
+        temp.num1Arr.shift();
+      }
+
       resultSpan.textContent = temp.num1Arr.join("");
       console.log(temp.num1Arr);
       
