@@ -108,7 +108,7 @@ btns.forEach(function(e) {
       // After clicking = or * / etc., store second number
     } else if (e.classList.contains("funct-btn") && funcBtnsEnabled == true) {
       inputs.operator = event.target.textContent;
-      inputs.firstNumber = temp.num1Arr.join("");
+      inputs.firstNumber = +temp.num1Arr.join("");
       temp.num1Arr = [];
       
       resultSpan.textContent = inputs.firstNumber + inputs.operator;
@@ -120,7 +120,18 @@ btns.forEach(function(e) {
   if (e.classList.contains("num") && inputs.firstNumber !== null) {
       temp.num2Arr.push(event.target.textContent);
       resultSpan.textContent = inputs.firstNumber + inputs.operator + temp.num2Arr.join("");
+
+      inputs.secondNumber = +temp.num2Arr.join("");
+      
+      let result = add(inputs.firstNumber, inputs.secondNumber);
+      console.log(result);
+      
+      // if (inputs.operator === "+") {
+      //   add(inputs.firstNumber, inputs.secondNumber);
+      // }
   }
+
+  
     
   });
 });
