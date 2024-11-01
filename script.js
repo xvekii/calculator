@@ -53,6 +53,22 @@ function divide(firstNum, secondNum) {
 
 function operate(operator, firstNum, secondNum) {  
   // Calls one of the above functions on the numbers
+  switch (operator) {
+    case "+":
+      add(firstNum, secondNum);
+      break;
+    case "-":
+      subtract(firstNum, secondNum);
+      break;
+    case "*":
+      multiply(firstNum, secondNum);
+      break;
+    case "/":
+      divide(firstNum, secondNum);
+      break;
+    default:
+      console.log(`Error: ${operator}`);
+  }
 }
 
 
