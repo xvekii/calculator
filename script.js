@@ -108,9 +108,12 @@ function toggleFuncBtns(enable) {
 btnsMainCont.addEventListener("click", (event) => {
   let selected = event.target;
   console.log(selected.textContent);
+  
   if (selected.textContent === "±" && temp.num1Arr.length === 0) {
     temp.num1Arr.push("-");
     resultSpan.textContent = temp.num1Arr;
+  } else if (selected.textContent === "±" && temp.num2Arr.length === 0) {
+    temp.num2Arr.push("-");
   }
 
   if (selected.classList.contains("num")) {
