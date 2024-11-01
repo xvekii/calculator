@@ -51,6 +51,10 @@ function divide(firstNum, secondNum) {
   return firstNum / secondNum;
 }
 
+function isFloat(num) {
+  return typeof num === "number" && !Number.isInteger(num);
+}
+
 function operate(operator, firstNum, secondNum) {  
   // Calls one of the above functions on the numbers
   let operationResult = 0;
@@ -126,6 +130,7 @@ btnsMainCont.addEventListener("click", (event) => {
     // After clicking operator, update first number
     // After clicking = or * / etc., store second number
   } else if (event.target.classList.contains("funct-btn") && funcBtnsEnabled == true) {
+    decimalBtn.disabled = false;
     inputs.operator = event.target.textContent;
     inputs.firstNumber = +temp.num1Arr.join("");
     temp.num1Arr = [];
@@ -143,9 +148,18 @@ btnsMainCont.addEventListener("click", (event) => {
       inputs.secondNumber = +temp.num2Arr.join("");
   }
   
-  if (event.target.classList.contains("equal-btn") && inputs.firstNumber != null && inputs.secondNumber !== null) {
+  if (event.target.classList.contains("equal-btn") && inputs.firstNumber != null && inputs.secondNumber != null) {
     let result = operate(inputs.operator, inputs.firstNumber, inputs.secondNumber);
-    resultSpan.textContent = result;
+    
+    if (isFloat(result)) {
+      if (result.toString().length > 7) {
+        result = Number.parseFloat(result).toPrecision(7);
+      }
+      resultSpan.textContent = result;
+      console.log(`Float: ${result}`);
+    } else {
+      resultSpan.textContent = result;
+      console.log(`Integer: ${result}`);
+    }
   }
-
   });
