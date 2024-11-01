@@ -51,6 +51,11 @@ function divide(firstNum, secondNum) {
   return firstNum / secondNum;
 }
 
+function percentage(firstNum, secondNum) {
+  if (secondNum === 0) return 0;
+  return (firstNum * 100) / secondNum;
+}
+
 function isFloat(num) {
   return typeof num === "number" && !Number.isInteger(num);
 }
@@ -70,6 +75,9 @@ function operate(operator, firstNum, secondNum) {
       break;
     case "/":
       operationResult = divide(firstNum, secondNum);
+      break;
+    case "%":
+      operationResult = percentage(firstNum, secondNum);
       break;
     default:
       console.log(`Error: ${operator}`);
