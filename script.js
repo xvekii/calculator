@@ -106,15 +106,21 @@ function toggleFuncBtns(enable) {
 
 
 btnsMainCont.addEventListener("click", (event) => {
-  // If class of the button is a number, then store in a variable
-  if (event.target.classList.contains("num")) {
+  let selected = event.target;
+  console.log(selected.textContent);
+  if (selected.textContent === "±" && temp.num1Arr.length === 0) {
+    temp.num1Arr.push("-");
+    resultSpan.textContent = temp.num1Arr;
+  }
+
+  if (selected.classList.contains("num")) {
     toggleFuncBtns(true);
     
     // Temporarily store first number digits and show them on the screen
-    temp.num1Arr.push(event.target.textContent);
+    temp.num1Arr.push(selected.textContent);
 
     // Make sure . can't be used twice in a number
-    if (event.target.textContent === ".") {
+    if (selected.textContent === ".") {
       decimalBtn.disabled = true;
     }
 
@@ -137,26 +143,26 @@ btnsMainCont.addEventListener("click", (event) => {
     // If operator is clicked, store into inputs.firstNumber
     // After clicking operator, update first number
     // After clicking = or * / etc., store second number
-  } else if (event.target.classList.contains("funct-btn") && funcBtnsEnabled == true) {
+  } else if (selected.classList.contains("funct-btn") && funcBtnsEnabled == true) {
     decimalBtn.disabled = false;
-    inputs.operator = event.target.textContent;
+    inputs.operator = selected.textContent;
     inputs.firstNumber = +temp.num1Arr.join("");
-    temp.num1Arr = [];
+    // temp.num1Arr = [];
     
     resultSpan.textContent = inputs.firstNumber + inputs.operator;
     funcBtnsEnabled = false;
     
-    console.log(event.target.textContent);
+    console.log(selected.textContent);
   }
 
-  if (event.target.classList.contains("num") && inputs.firstNumber != null) {
-      temp.num2Arr.push(event.target.textContent);
+  if (selected.classList.contains("num") && inputs.firstNumber != null) {
+      temp.num2Arr.push(selected.textContent);
       resultSpan.textContent = inputs.firstNumber + inputs.operator + temp.num2Arr.join("");
 
       inputs.secondNumber = +temp.num2Arr.join("");
   }
   
-  if (event.target.classList.contains("equal-btn") && inputs.firstNumber != null && inputs.secondNumber != null) {
+  if (selected.classList.contains("equal-btn") && inputs.firstNumber != null && inputs.secondNumber != null) {
     let result = operate(inputs.operator, inputs.firstNumber, inputs.secondNumber);
     
     if (isFloat(result)) {
