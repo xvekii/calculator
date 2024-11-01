@@ -53,22 +53,24 @@ function divide(firstNum, secondNum) {
 
 function operate(operator, firstNum, secondNum) {  
   // Calls one of the above functions on the numbers
+  let operationResult = 0;
   switch (operator) {
     case "+":
-      add(firstNum, secondNum);
+      operationResult = add(firstNum, secondNum);
       break;
     case "-":
-      subtract(firstNum, secondNum);
+      operationResult = subtract(firstNum, secondNum);
       break;
     case "*":
-      multiply(firstNum, secondNum);
+      operationResult = multiply(firstNum, secondNum);
       break;
     case "/":
-      divide(firstNum, secondNum);
+      operationResult = divide(firstNum, secondNum);
       break;
     default:
       console.log(`Error: ${operator}`);
   }
+  return operationResult;
 }
 
 
@@ -134,17 +136,16 @@ btnsMainCont.addEventListener("click", (event) => {
     console.log(event.target.textContent);
   }
 
-  if (event.target.classList.contains("num") && inputs.firstNumber !== null) {
+  if (event.target.classList.contains("num") && inputs.firstNumber != null) {
       temp.num2Arr.push(event.target.textContent);
       resultSpan.textContent = inputs.firstNumber + inputs.operator + temp.num2Arr.join("");
 
       inputs.secondNumber = +temp.num2Arr.join("");
-      
-      let result = add(inputs.firstNumber, inputs.secondNumber);
-      console.log(result);
-      
-      // if (inputs.operator === "+") {
-      //   add(inputs.firstNumber, inputs.secondNumber);
-      // }
-  } 
+  }
+  
+  if (event.target.classList.contains("equal-btn") && inputs.firstNumber != null && inputs.secondNumber !== null) {
+    let result = operate(inputs.operator, inputs.firstNumber, inputs.secondNumber);
+    resultSpan.textContent = result;
+  }
+
   });
