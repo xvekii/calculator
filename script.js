@@ -90,6 +90,9 @@ function operate(operator, firstNum, secondNum) {
   return operationResult;
 }
 
+function updateScreen(content) {
+  resultSpan.textContent = content;
+}
 
 acBtn.addEventListener("click", () => {
   inputs.clear();
