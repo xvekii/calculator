@@ -115,7 +115,6 @@ function toggleFuncBtns(enable) {
 
 btnsMainCont.addEventListener("click", (event) => {
   let selected = event.target;
-  console.log(selected.textContent);
   
   if (selected.textContent === "±" && temp.num1Arr.length === 0) {
     temp.num1Arr.push("-");
@@ -128,7 +127,9 @@ btnsMainCont.addEventListener("click", (event) => {
     toggleFuncBtns(true);
     
     // Temporarily store first number digits and show them on the screen
-    temp.num1Arr.push(selected.textContent);
+    if (inputs.operator === null) {
+      temp.num1Arr.push(selected.textContent);
+    }
 
     // Make sure . can't be used twice in a number
     if (selected.textContent === ".") {
@@ -147,23 +148,19 @@ btnsMainCont.addEventListener("click", (event) => {
     if (temp.num1Arr.length == 2 && temp.num1Arr[0] === "0") {
       temp.num1Arr.shift();
     }
-
     updateScreen(temp.num1Arr.join(""));
-    console.log(temp.num1Arr);
     
-    // If operator is clicked, store into inputs.firstNumber
-    // After clicking operator, update first number
-    // After clicking = or * / etc., store second number
   } else if (selected.classList.contains("funct-btn") && funcBtnsEnabled == true) {
     decimalBtn.disabled = false;
     inputs.operator = selected.textContent;
+    
+    // Store first number to inputs after clicking funct btn
     inputs.firstNumber = +temp.num1Arr.join("");
+    console.log(`in.first: ${inputs.firstNumber }`);
     // temp.num1Arr = [];
     
     updateScreen(inputs.firstNumber + inputs.operator);
     funcBtnsEnabled = false;
-    
-    console.log(selected.textContent);
   }
 
   if (selected.classList.contains("num") && inputs.firstNumber != null) {
@@ -171,6 +168,7 @@ btnsMainCont.addEventListener("click", (event) => {
     updateScreen(inputs.firstNumber + inputs.operator + temp.num2Arr.join(""));
 
     inputs.secondNumber = +temp.num2Arr.join("");
+    console.log(`2nd num: ${temp.num2Arr}`);
   }
   
   if (selected.classList.contains("equal-btn") && inputs.firstNumber != null && inputs.secondNumber != null) {
@@ -186,18 +184,14 @@ btnsMainCont.addEventListener("click", (event) => {
       updateScreen(temp.result);
       console.log(`Integer: ${temp.result}`);
     }
+    console.log(`in.first: ${inputs.firstNumber }`);
   }
 
-  // if (selected.classList.contains("funct-btn") && temp.result != null && temp.operator === null) {
-  //   inputs.operator = selected.textContent;
-    
-  //   // resultSpan.textContent = temp.result + inputs.operator;
-  //   // if (temp.newNum2Arr.length !== 0) {
-  //   //   temp.newNum2Arr.push(selected.textContent);
-  //   //   temp.result = temp.result.toString();
-      
-  //   //   resultSpan.textContent = temp.result + temp.newNum2Arr.join("");
-  //   // }
-  //   // temp.result = operate(inputs.operator, inputs.firstNumber, inputs.secondNumber);
+  // if (selected.classList.contains("funct-btn") && inputs.secondNumber != null && inputs.operator != null) {
+  //   temp.operator = selected.textContent;
+  //   temp.result = operate(inputs.operator, inputs.firstNumber, inputs.secondNumber);
+  //   updateScreen(temp.result);
+  
   // }
+
   });
