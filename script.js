@@ -97,7 +97,7 @@ function updateScreen(content) {
 acBtn.addEventListener("click", () => {
   inputs.clear();
   temp.clear();
-  resultSpan.textContent = "0";
+  updateScreen("0");
   decimalBtn.disabled = false;
 });
 
@@ -119,7 +119,7 @@ btnsMainCont.addEventListener("click", (event) => {
   
   if (selected.textContent === "±" && temp.num1Arr.length === 0) {
     temp.num1Arr.push("-");
-    resultSpan.textContent = temp.num1Arr;
+    updateScreen(temp.num1Arr);
   } else if (selected.textContent === "±" && temp.num2Arr.length === 0) {
     temp.num2Arr.push("-");
   }
@@ -148,7 +148,7 @@ btnsMainCont.addEventListener("click", (event) => {
       temp.num1Arr.shift();
     }
 
-    resultSpan.textContent = temp.num1Arr.join("");
+    updateScreen(temp.num1Arr.join(""));
     console.log(temp.num1Arr);
     
     // If operator is clicked, store into inputs.firstNumber
@@ -160,7 +160,7 @@ btnsMainCont.addEventListener("click", (event) => {
     inputs.firstNumber = +temp.num1Arr.join("");
     // temp.num1Arr = [];
     
-    resultSpan.textContent = inputs.firstNumber + inputs.operator;
+    updateScreen(inputs.firstNumber + inputs.operator);
     funcBtnsEnabled = false;
     
     console.log(selected.textContent);
@@ -168,7 +168,7 @@ btnsMainCont.addEventListener("click", (event) => {
 
   if (selected.classList.contains("num") && inputs.firstNumber != null) {
     temp.num2Arr.push(selected.textContent);
-    resultSpan.textContent = inputs.firstNumber + inputs.operator + temp.num2Arr.join("");
+    updateScreen(inputs.firstNumber + inputs.operator + temp.num2Arr.join(""));
 
     inputs.secondNumber = +temp.num2Arr.join("");
   }
@@ -180,28 +180,24 @@ btnsMainCont.addEventListener("click", (event) => {
       if (temp.result.toString().length > 7) {
         temp.result = Number.parseFloat(temp.result).toPrecision(7);
       }
-      resultSpan.textContent = temp.result;
+      updateScreen(temp.result);
       console.log(`Float: ${temp.result}`);
     } else {
-      resultSpan.textContent = temp.result;
+      updateScreen(temp.result);
       console.log(`Integer: ${temp.result}`);
     }
   }
 
-  if (selected.classList.contains("funct-btn") && temp.result != null && temp.operator === null) {
-    inputs.operator = selected.textContent;
+  // if (selected.classList.contains("funct-btn") && temp.result != null && temp.operator === null) {
+  //   inputs.operator = selected.textContent;
     
-    // resultSpan.textContent = temp.result + inputs.operator;
-    resultSpan.textContent = "Hoho!";
-    // if (temp.newNum2Arr.length !== 0) {
-    //   temp.newNum2Arr.push(selected.textContent);
-    //   temp.result = temp.result.toString();
+  //   // resultSpan.textContent = temp.result + inputs.operator;
+  //   // if (temp.newNum2Arr.length !== 0) {
+  //   //   temp.newNum2Arr.push(selected.textContent);
+  //   //   temp.result = temp.result.toString();
       
-    //   resultSpan.textContent = temp.result + temp.newNum2Arr.join("");
-    // }
-    // temp.result = operate(inputs.operator, inputs.firstNumber, inputs.secondNumber);
-
-  }
-
-
+  //   //   resultSpan.textContent = temp.result + temp.newNum2Arr.join("");
+  //   // }
+  //   // temp.result = operate(inputs.operator, inputs.firstNumber, inputs.secondNumber);
+  // }
   });
