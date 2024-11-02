@@ -23,7 +23,10 @@ const inputs = {
 
 const temp = {
   num1Arr: [],
-  num2Arr: [], 
+  num2Arr: [],
+  newNum2Arr: [], 
+  operator: null,
+  result: null,
 
   clear() {
     for (const key in this) {
@@ -31,6 +34,8 @@ const temp = {
         this[key] = [];
       }
     }
+    this.result = null;
+    this.operator = null;
   }
 }
 
@@ -159,24 +164,41 @@ btnsMainCont.addEventListener("click", (event) => {
   }
 
   if (selected.classList.contains("num") && inputs.firstNumber != null) {
-      temp.num2Arr.push(selected.textContent);
-      resultSpan.textContent = inputs.firstNumber + inputs.operator + temp.num2Arr.join("");
+    temp.num2Arr.push(selected.textContent);
+    resultSpan.textContent = inputs.firstNumber + inputs.operator + temp.num2Arr.join("");
 
-      inputs.secondNumber = +temp.num2Arr.join("");
+    inputs.secondNumber = +temp.num2Arr.join("");
   }
   
   if (selected.classList.contains("equal-btn") && inputs.firstNumber != null && inputs.secondNumber != null) {
-    let result = operate(inputs.operator, inputs.firstNumber, inputs.secondNumber);
+    temp.result = operate(inputs.operator, inputs.firstNumber, inputs.secondNumber);
     
-    if (isFloat(result)) {
-      if (result.toString().length > 7) {
-        result = Number.parseFloat(result).toPrecision(7);
+    if (isFloat(temp.result)) {
+      if (temp.result.toString().length > 7) {
+        temp.result = Number.parseFloat(temp.result).toPrecision(7);
       }
-      resultSpan.textContent = result;
-      console.log(`Float: ${result}`);
+      resultSpan.textContent = temp.result;
+      console.log(`Float: ${temp.result}`);
     } else {
-      resultSpan.textContent = result;
-      console.log(`Integer: ${result}`);
+      resultSpan.textContent = temp.result;
+      console.log(`Integer: ${temp.result}`);
     }
   }
+
+  if (selected.classList.contains("funct-btn") && temp.result != null && temp.operator === null) {
+    inputs.operator = selected.textContent;
+    
+    // resultSpan.textContent = temp.result + inputs.operator;
+    resultSpan.textContent = "Hoho!";
+    // if (temp.newNum2Arr.length !== 0) {
+    //   temp.newNum2Arr.push(selected.textContent);
+    //   temp.result = temp.result.toString();
+      
+    //   resultSpan.textContent = temp.result + temp.newNum2Arr.join("");
+    // }
+    // temp.result = operate(inputs.operator, inputs.firstNumber, inputs.secondNumber);
+
+  }
+
+
   });
