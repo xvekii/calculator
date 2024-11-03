@@ -156,7 +156,7 @@ btnsMainCont.addEventListener("click", (event) => {
     
     // Store first number to inputs after clicking funct btn
     inputs.firstNumber = +temp.num1Arr.join("");
-    console.log(`in.first: ${inputs.firstNumber }`);
+    console.log(`1st: ${inputs.firstNumber }`);
     // temp.num1Arr = [];
     
     updateScreen(inputs.firstNumber + inputs.operator);
@@ -168,7 +168,7 @@ btnsMainCont.addEventListener("click", (event) => {
     updateScreen(inputs.firstNumber + inputs.operator + temp.num2Arr.join(""));
 
     inputs.secondNumber = +temp.num2Arr.join("");
-    console.log(`2nd num: ${temp.num2Arr}`);
+    console.log(`2nd : ${temp.num2Arr}`);
   }
   
   if (selected.classList.contains("equal-btn") && inputs.firstNumber != null && inputs.secondNumber != null) {
@@ -185,13 +185,23 @@ btnsMainCont.addEventListener("click", (event) => {
       console.log(`Integer: ${temp.result}`);
     }
     console.log(`in.first: ${inputs.firstNumber }`);
+    console.log(`in.second: ${inputs.secondNumber }`);
   }
 
-  // if (selected.classList.contains("funct-btn") && inputs.secondNumber != null && inputs.operator != null) {
-  //   temp.operator = selected.textContent;
-  //   temp.result = operate(inputs.operator, inputs.firstNumber, inputs.secondNumber);
-  //   updateScreen(temp.result);
-  
-  // }
+  if (selected.classList.contains("funct-btn") && inputs.secondNumber != null && inputs.operator != null) {
+    temp.operator = selected.textContent;
+    temp.result = operate(inputs.operator, inputs.firstNumber, inputs.secondNumber);
+    updateScreen(temp.result);
+    console.log(`Res ${temp.result}`);
+
+    temp.num2Arr = [];
+    inputs.firstNumber = temp.result;
+    updateScreen(temp.result + temp.operator);
+
+    console.log(`Fin first: ${inputs.firstNumber}`)
+    // temp.result = operate(inputs.operator, temp.result, temp.num2Arr);
+    // updateScreen(temp.result);
+
+  }
 
   });
