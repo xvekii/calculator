@@ -115,12 +115,13 @@ function toggleFuncBtns(enable) {
 
 btnsMainCont.addEventListener("click", (event) => {
   let selected = event.target;
-  
+
   if (selected.textContent === "±" && temp.num1Arr.length === 0) {
     temp.num1Arr.push("-");
     updateScreen(temp.num1Arr);
   } else if (selected.textContent === "±" && temp.num2Arr.length === 0) {
     temp.num2Arr.push("-");
+    updateScreen(temp.num2Arr);
   }
 
   if (selected.classList.contains("num")) {
@@ -152,7 +153,14 @@ btnsMainCont.addEventListener("click", (event) => {
     
   } else if (selected.classList.contains("funct-btn") && funcBtnsEnabled == true) {
     decimalBtn.disabled = false;
-    inputs.operator = selected.textContent;
+    
+    if (temp.operator === null) {
+      inputs.operator = selected.textContent;
+      console.log(`Inputs operator: ${inputs.operator}`)
+    } else {
+      temp.operator = selected.textContent;
+      console.log(`Temp operator: ${temp.operator}`)
+    }
     
     // Store first number to inputs after clicking funct btn
     inputs.firstNumber = +temp.num1Arr.join("");
@@ -168,12 +176,25 @@ btnsMainCont.addEventListener("click", (event) => {
     updateScreen(inputs.firstNumber + inputs.operator + temp.num2Arr.join(""));
 
     inputs.secondNumber = +temp.num2Arr.join("");
-    console.log(`2nd : ${temp.num2Arr}`);
+    // console.log(`2nd Arr: ${temp.num2Arr}`);
   }
   
-  if (selected.classList.contains("equal-btn") && inputs.firstNumber != null && inputs.secondNumber != null) {
-    temp.result = operate(inputs.operator, inputs.firstNumber, inputs.secondNumber);
+  if ((selected.classList.contains("equal-btn") || selected.classList.contains("funct-btn")) && inputs.firstNumber != null && inputs.secondNumber != null) {
+    if (selected.classList.contains("funct-btn") && inputs.operator != null) {
+      temp.operator = selected.textContent;
+      let operator = temp.operator;
+      temp.result = operate(`${operator}`, inputs.firstNumber, inputs.secondNumber);
+    } else if (selected.classList.contains("funct-btn") && inputs.operator === null) {
+      inputs.operator = selected.textContent;
+      let operator = inputs.operator;
+      temp.result = operate(`${operator}`, inputs.firstNumber, inputs.secondNumber);
+    } else if (selected.classList.contains("equal-btn")) {
+      let operator = inputs.operator;
+      temp.result = operate(`${operator}`, inputs.firstNumber, inputs.secondNumber);
+    }
     
+    temp.num2Arr = [];
+
     if (isFloat(temp.result)) {
       if (temp.result.toString().length > 7) {
         temp.result = Number.parseFloat(temp.result).toPrecision(7);
@@ -184,24 +205,31 @@ btnsMainCont.addEventListener("click", (event) => {
       updateScreen(temp.result);
       console.log(`Integer: ${temp.result}`);
     }
+    
+    if (temp.operator != null) {
+      inputs.firstNumber = temp.result;
+    }
+    
+    updateScreen(temp.result);
+    
     console.log(`in.first: ${inputs.firstNumber }`);
     console.log(`in.second: ${inputs.secondNumber }`);
   }
 
-  if (selected.classList.contains("funct-btn") && inputs.secondNumber != null && inputs.operator != null) {
-    temp.operator = selected.textContent;
-    temp.result = operate(inputs.operator, inputs.firstNumber, inputs.secondNumber);
-    updateScreen(temp.result);
-    console.log(`Res ${temp.result}`);
+  // if (selected.classList.contains("funct-btn") && inputs.secondNumber != null && inputs.operator != null) {
+  //   temp.operator = selected.textContent;
+  //   temp.result = operate(inputs.operator, inputs.firstNumber, inputs.secondNumber);
+  //   updateScreen(temp.result);
+  //   console.log(`Res ${temp.result}`);
 
-    temp.num2Arr = [];
-    inputs.firstNumber = temp.result;
-    updateScreen(temp.result + temp.operator);
+  //   temp.num2Arr = [];
+  //   inputs.firstNumber = temp.result;
+  //   updateScreen(temp.result + temp.operator);
 
-    console.log(`Fin first: ${inputs.firstNumber}`)
-    // temp.result = operate(inputs.operator, temp.result, temp.num2Arr);
-    // updateScreen(temp.result);
+  //   console.log(`Fin first: ${inputs.firstNumber}`)
+  //   // temp.result = operate(inputs.operator, temp.result, temp.num2Arr);
+  //   // updateScreen(temp.result);
 
-  }
+  // }
 
   });
