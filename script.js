@@ -154,20 +154,24 @@ btnsMainCont.addEventListener("click", (event) => {
   } else if (selected.classList.contains("funct-btn") && funcBtnsEnabled == true) {
     decimalBtn.disabled = false;
     
-    if (temp.operator === null) {
+    // Store first number to inputs after clicking funct btn
+    inputs.firstNumber = +temp.num1Arr.join("");
+
+    if (inputs.operator === null) {
       inputs.operator = selected.textContent;
+      updateScreen(inputs.firstNumber + inputs.operator);
       console.log(`Inputs operator: ${inputs.operator}`)
     } else {
+      // Add temp.op clearing if operation completed?
       temp.operator = selected.textContent;
+      updateScreen(inputs.firstNumber + temp.operator);
       console.log(`Temp operator: ${temp.operator}`)
     }
     
-    // Store first number to inputs after clicking funct btn
-    inputs.firstNumber = +temp.num1Arr.join("");
     console.log(`1st: ${inputs.firstNumber }`);
     // temp.num1Arr = [];
     
-    updateScreen(inputs.firstNumber + inputs.operator);
+    
     funcBtnsEnabled = false;
   }
 
@@ -182,16 +186,23 @@ btnsMainCont.addEventListener("click", (event) => {
   if ((selected.classList.contains("equal-btn") || selected.classList.contains("funct-btn")) && inputs.firstNumber != null && inputs.secondNumber != null) {
     if (selected.classList.contains("funct-btn") && inputs.operator != null) {
       temp.operator = selected.textContent;
-      let operator = temp.operator;
-      temp.result = operate(`${operator}`, inputs.firstNumber, inputs.secondNumber);
+      // let operator = temp.operator;
+      // temp.result = operate(`${operator}`, inputs.firstNumber, inputs.secondNumber);
+      updateScreen(inputs.firstNumber + temp.operator + temp.num2Arr.join(""));
     } else if (selected.classList.contains("funct-btn") && inputs.operator === null) {
       inputs.operator = selected.textContent;
-      let operator = inputs.operator;
-      temp.result = operate(`${operator}`, inputs.firstNumber, inputs.secondNumber);
+      // let operator = inputs.operator;
+      temp.operator = inputs.operator;
+      updateScreen(inputs.firstNumber + temp.operator + temp.num2Arr.join(""));
+      // temp.result = operate(`${operator}`, inputs.firstNumber, inputs.secondNumber);
     } else if (selected.classList.contains("equal-btn")) {
-      let operator = inputs.operator;
-      temp.result = operate(`${operator}`, inputs.firstNumber, inputs.secondNumber);
+      // let operator = inputs.operator;
+      temp.operator = inputs.operator;
+      updateScreen(inputs.firstNumber + temp.operator + temp.num2Arr.join(""));
+      // temp.result = operate(`${operator}`, inputs.firstNumber, inputs.secondNumber);
     }
+    
+    temp.result = operate(temp.operator, inputs.firstNumber, inputs.secondNumber);
     
     temp.num2Arr = [];
 
