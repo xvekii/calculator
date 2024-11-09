@@ -128,7 +128,7 @@ btnsMainCont.addEventListener("click", (event) => {
     toggleFuncBtns(true);
     
     // Temporarily store first number digits and show them on the screen
-    if (inputs.operator === null) {
+    if (inputs.operator === null && inputs.firstNumber === null) {
       temp.num1Arr.push(selected.textContent);
     }
 
@@ -151,7 +151,7 @@ btnsMainCont.addEventListener("click", (event) => {
     }
     updateScreen(temp.num1Arr.join(""));
     
-  } else if (selected.classList.contains("funct-btn") && funcBtnsEnabled == true) {
+  } else if (selected.classList.contains("funct-btn") && funcBtnsEnabled == true && inputs.firstNumber === null) {
     decimalBtn.disabled = false;
     
     // Store first number to inputs after clicking funct btn
@@ -169,7 +169,6 @@ btnsMainCont.addEventListener("click", (event) => {
     }
     
     console.log(`1st: ${inputs.firstNumber }`);
-    // temp.num1Arr = [];
     
     
     funcBtnsEnabled = false;
@@ -180,31 +179,35 @@ btnsMainCont.addEventListener("click", (event) => {
     updateScreen(inputs.firstNumber + inputs.operator + temp.num2Arr.join(""));
 
     inputs.secondNumber = +temp.num2Arr.join("");
-    // console.log(`2nd Arr: ${temp.num2Arr}`);
+    console.log(`2nd: ${inputs.secondNumber }`);
   }
   
   if ((selected.classList.contains("equal-btn") || selected.classList.contains("funct-btn")) && inputs.firstNumber != null && inputs.secondNumber != null) {
     if (selected.classList.contains("funct-btn") && inputs.operator != null) {
       temp.operator = selected.textContent;
-      // let operator = temp.operator;
-      // temp.result = operate(`${operator}`, inputs.firstNumber, inputs.secondNumber);
+      temp.result = operate(inputs.operator, inputs.firstNumber, inputs.secondNumber);
+      inputs.operator = temp.operator;
+      inputs.firstNumber = temp.result;
+      
+      inputs.secondNumber = null;
+      temp.num2Arr = [];
       updateScreen(inputs.firstNumber + temp.operator + temp.num2Arr.join(""));
     } else if (selected.classList.contains("funct-btn") && inputs.operator === null) {
       inputs.operator = selected.textContent;
-      // let operator = inputs.operator;
-      temp.operator = inputs.operator;
-      updateScreen(inputs.firstNumber + temp.operator + temp.num2Arr.join(""));
+      temp.result = operate(inputs.operator, inputs.firstNumber, inputs.secondNumber);
+      updateScreen(inputs.firstNumber + inputs.operator + temp.num2Arr.join(""));
+
       // temp.result = operate(`${operator}`, inputs.firstNumber, inputs.secondNumber);
     } else if (selected.classList.contains("equal-btn")) {
-      // let operator = inputs.operator;
-      temp.operator = inputs.operator;
+      // temp.operator = inputs.operator;
+      temp.result = operate(inputs.operator, inputs.firstNumber, inputs.secondNumber);
       updateScreen(inputs.firstNumber + temp.operator + temp.num2Arr.join(""));
       // temp.result = operate(`${operator}`, inputs.firstNumber, inputs.secondNumber);
     }
     
-    temp.result = operate(temp.operator, inputs.firstNumber, inputs.secondNumber);
+    // temp.result = operate(temp.operator, inputs.firstNumber, inputs.secondNumber);
     
-    temp.num2Arr = [];
+    // temp.num2Arr = [];
 
     if (isFloat(temp.result)) {
       if (temp.result.toString().length > 7) {
@@ -214,12 +217,13 @@ btnsMainCont.addEventListener("click", (event) => {
       console.log(`Float: ${temp.result}`);
     } else {
       updateScreen(temp.result);
-      console.log(`Integer: ${temp.result}`);
+      console.log(`Int result: ${temp.result}`);
     }
     
-    if (temp.operator != null) {
-      inputs.firstNumber = temp.result;
-    }
+    // if (temp.operator != null) {
+    //   inputs.firstNumber = temp.result;
+    //   console.log(`tmp 1st (res) = ${temp.result}`);
+    // }
     
     updateScreen(temp.result);
     
