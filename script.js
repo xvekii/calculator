@@ -24,7 +24,6 @@ const inputs = {
 const temp = {
   num1Arr: [],
   num2Arr: [],
-  newNum2Arr: [], 
   operator: null,
   result: null,
 
@@ -196,18 +195,11 @@ btnsMainCont.addEventListener("click", (event) => {
       inputs.operator = selected.textContent;
       temp.result = operate(inputs.operator, inputs.firstNumber, inputs.secondNumber);
       updateScreen(inputs.firstNumber + inputs.operator + temp.num2Arr.join(""));
-
-      // temp.result = operate(`${operator}`, inputs.firstNumber, inputs.secondNumber);
     } else if (selected.classList.contains("equal-btn")) {
       // temp.operator = inputs.operator;
       temp.result = operate(inputs.operator, inputs.firstNumber, inputs.secondNumber);
       updateScreen(inputs.firstNumber + temp.operator + temp.num2Arr.join(""));
-      // temp.result = operate(`${operator}`, inputs.firstNumber, inputs.secondNumber);
     }
-    
-    // temp.result = operate(temp.operator, inputs.firstNumber, inputs.secondNumber);
-    
-    // temp.num2Arr = [];
 
     if (isFloat(temp.result)) {
       if (temp.result.toString().length > 7) {
@@ -220,31 +212,9 @@ btnsMainCont.addEventListener("click", (event) => {
       console.log(`Int result: ${temp.result}`);
     }
     
-    // if (temp.operator != null) {
-    //   inputs.firstNumber = temp.result;
-    //   console.log(`tmp 1st (res) = ${temp.result}`);
-    // }
-    
     updateScreen(temp.result);
     
     console.log(`in.first: ${inputs.firstNumber }`);
     console.log(`in.second: ${inputs.secondNumber }`);
   }
-
-  // if (selected.classList.contains("funct-btn") && inputs.secondNumber != null && inputs.operator != null) {
-  //   temp.operator = selected.textContent;
-  //   temp.result = operate(inputs.operator, inputs.firstNumber, inputs.secondNumber);
-  //   updateScreen(temp.result);
-  //   console.log(`Res ${temp.result}`);
-
-  //   temp.num2Arr = [];
-  //   inputs.firstNumber = temp.result;
-  //   updateScreen(temp.result + temp.operator);
-
-  //   console.log(`Fin first: ${inputs.firstNumber}`)
-  //   // temp.result = operate(inputs.operator, temp.result, temp.num2Arr);
-  //   // updateScreen(temp.result);
-
-  // }
-
   });
