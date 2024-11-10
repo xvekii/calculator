@@ -115,6 +115,15 @@ function toggleFuncBtns(enable) {
 btnsMainCont.addEventListener("click", (event) => {
   let selected = event.target;
 
+  if (selected.classList.contains("del-btn") && temp.num1Arr.length > 0 && temp.num1Arr.length === 0) {
+    temp.num1Arr.pop();
+    if (temp.num1Arr.length === 0) {
+      updateScreen("0");
+    } else {
+      updateScreen(temp.num1Arr.join(""));
+    }
+  }
+
   if (selected.textContent === "±" && temp.num1Arr.length === 0) {
     temp.num1Arr.push("-");
     updateScreen(temp.num1Arr);
@@ -168,7 +177,6 @@ btnsMainCont.addEventListener("click", (event) => {
     }
     
     console.log(`1st: ${inputs.firstNumber }`);
-    
     
     funcBtnsEnabled = false;
   }
