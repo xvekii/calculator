@@ -4,6 +4,7 @@ const funcBtns = document.querySelectorAll(".funct-btn");
 let resultSpan = document.querySelector(".result-span");
 const decimalBtn = document.querySelector(".decimal");
 const acBtn = document.querySelector(".ac-btn");
+const delBtn = document.querySelector(".del-btn");
 
 let funcBtnsEnabled = false;
 
@@ -111,18 +112,17 @@ function toggleFuncBtns(enable) {
   });
 }
 
+delBtn.addEventListener("click", () => {
+  if (temp.num1Arr.length > 0 && inputs.operator === null) {
+    temp.num1Arr.pop();
+    updateScreen(temp.num1Arr.length > 0 ? temp.num1Arr.join("") : "0");
+  } else if (temp.num1Arr.length === 0 && temp.num2Arr.length === 0) {
+    updateScreen("0"); 
+  }
+});
 
 btnsMainCont.addEventListener("click", (event) => {
   let selected = event.target;
-
-  if (selected.classList.contains("del-btn") && temp.num1Arr.length > 0 && temp.num1Arr.length === 0) {
-    temp.num1Arr.pop();
-    if (temp.num1Arr.length === 0) {
-      updateScreen("0");
-    } else {
-      updateScreen(temp.num1Arr.join(""));
-    }
-  }
 
   if (selected.textContent === "±" && temp.num1Arr.length === 0) {
     temp.num1Arr.push("-");
@@ -157,6 +157,7 @@ btnsMainCont.addEventListener("click", (event) => {
     if (temp.num1Arr.length == 2 && temp.num1Arr[0] === "0") {
       temp.num1Arr.shift();
     }
+
     updateScreen(temp.num1Arr.join(""));
     
   } else if (selected.classList.contains("funct-btn") && funcBtnsEnabled == true && inputs.firstNumber === null) {
