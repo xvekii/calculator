@@ -3,7 +3,7 @@
 }
 
 .main-container {
-  min-height: 470px;
+  min-height: 473px;
   max-width: 306px;
   border: 3px solid rgba(7, 59, 76, 0.08);
   margin: 150px auto;
@@ -31,23 +31,22 @@
   color: rgb(0 0 0);
   overflow: hidden;
   text-align: right; 
+  white-space: nowrap;
   padding: 0 3.2px;
+  text-shadow: 2px 2px #b3b3b3;
 }
 
 .buttons-main-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  gap: 6px;
-  max-width: 90%;
+  display: block;
+  width: 91%;
   height: 70%;
   margin: 0 auto;
 }
 
 .button-row {
   display: flex;
-  gap: 6px;
+  gap: 7px;
+  margin-bottom: 7px;
 }
 
 button {
