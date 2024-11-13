@@ -87,6 +87,9 @@ function operate(operator, firstNum, secondNum) {
     default:
       console.log(`Error: ${operator}`);
   }
+  if (isFloat(operationResult)) {
+    decimalBtn.disabled = false;
+  }
   return operationResult;
 }
 
@@ -122,15 +125,15 @@ delBtn.addEventListener("click", () => {
       inputs.clear();
       temp.clear();
     }
+    
   } else if (temp.num1Arr.length > 0 && inputs.operator != null && temp.operator === null && temp.num2Arr.length === 0) {
     inputs.operator = null;
     updateScreen(temp.num1Arr.join(""));
   } else if (temp.num1Arr.length > 0 && inputs.firstNumber != null && temp.num2Arr.length > 0 && inputs.operator != null) {
     temp.num2Arr.pop();
-    updateScreen(temp.num1Arr.join("") + inputs.operator + temp.num2Arr.join(""));
+    updateScreen(inputs.firstNumber + inputs.operator + temp.num2Arr.join(""));
     inputs.secondNumber = temp.num2Arr;
   } 
-  // Add control statement for deleting temp operator
 });
 
 btnsMainCont.addEventListener("click", (event) => {
@@ -170,6 +173,20 @@ btnsMainCont.addEventListener("click", (event) => {
       temp.num1Arr.shift();
     }
 
+    // Second number decimal handling in case there's . in the first place
+    if (temp.num2Arr[0] === ".") {
+      temp.num2Arr.unshift("0");
+      decimalBtn.disabled = true;
+    }
+    
+    if (temp.num2Arr[0] === "0" && temp.num2Arr[1] === "0") {
+      temp.num2Arr.pop();
+    }
+
+    if (temp.num2Arr.length == 2 && temp.num2Arr[0] === "0") {
+      temp.num2Arr.shift();
+    }
+    
     updateScreen(temp.num1Arr.join(""));
     
   } else if (selected.classList.contains("funct-btn") && funcBtnsEnabled == true && inputs.firstNumber === null) {
@@ -238,8 +255,6 @@ btnsMainCont.addEventListener("click", (event) => {
       updateScreen(temp.result);
       console.log(`Int result: ${temp.result}`);
     }
-    
-    updateScreen(temp.result);
     
     console.log(`in.first: ${inputs.firstNumber }`);
     console.log(`in.second: ${inputs.secondNumber }`);
