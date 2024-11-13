@@ -5,7 +5,9 @@ let resultSpan = document.querySelector(".result-span");
 const decimalBtn = document.querySelector(".decimal");
 const acBtn = document.querySelector(".ac-btn");
 const delBtn = document.querySelector(".del-btn");
+const numBtns = document.querySelectorAll(".num");
 
+toggleNumBtns(true);
 let funcBtnsEnabled = false;
 
 const inputs = {
@@ -102,6 +104,7 @@ acBtn.addEventListener("click", () => {
   temp.clear();
   updateScreen("0");
   decimalBtn.disabled = false;
+  toggleNumBtns(true);
 });
 
 funcBtns.forEach(btn => {
@@ -112,6 +115,12 @@ function toggleFuncBtns(enable) {
   funcBtnsEnabled = enable;
   funcBtns.forEach(btn => {
     btn.disabled = !enable; 
+  });
+}
+
+function toggleNumBtns(enable) {
+  numBtns.forEach(btn => {
+    btn.disabled = !enable;
   });
 }
 
@@ -227,6 +236,7 @@ btnsMainCont.addEventListener("click", (event) => {
   
   if ((selected.classList.contains("equal-btn") || selected.classList.contains("funct-btn")) && inputs.firstNumber != null && inputs.secondNumber != null) {
     if (selected.classList.contains("funct-btn") && inputs.operator != null) {
+      toggleNumBtns(true);
       temp.operator = selected.textContent;
       temp.result = operate(inputs.operator, inputs.firstNumber, inputs.secondNumber);
       inputs.operator = temp.operator;
@@ -236,21 +246,26 @@ btnsMainCont.addEventListener("click", (event) => {
       temp.num2Arr = [];
       updateScreen(inputs.firstNumber + temp.operator + temp.num2Arr.join(""));
     } else if (selected.classList.contains("funct-btn") && inputs.operator === null) {
+      toggleNumBtns(true);
       inputs.operator = selected.textContent;
       temp.result = operate(inputs.operator, inputs.firstNumber, inputs.secondNumber);
       updateScreen(inputs.firstNumber + inputs.operator + temp.num2Arr.join(""));
     } else if (selected.classList.contains("equal-btn")) {
-      // temp.operator = inputs.operator;
+      toggleNumBtns(false);
       temp.result = operate(inputs.operator, inputs.firstNumber, inputs.secondNumber);
       updateScreen(inputs.firstNumber + temp.operator + temp.num2Arr.join(""));
     }
 
     if (isFloat(temp.result)) {
-      if (temp.result.toString().length > 7) {
-        temp.result = Number.parseFloat(temp.result).toPrecision(7);
+      if (temp.result === Infinity) {
+        updateScreen("Ho! Ho! Ho!");
+      } else {
+        if (temp.result.toString().length > 7) {
+          temp.result = Number.parseFloat(temp.result).toPrecision(7);
+        }
+        updateScreen(temp.result);
+        console.log(`Float: ${temp.result}`);
       }
-      updateScreen(temp.result);
-      console.log(`Float: ${temp.result}`);
     } else {
       updateScreen(temp.result);
       console.log(`Int result: ${temp.result}`);
