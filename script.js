@@ -113,12 +113,24 @@ function toggleFuncBtns(enable) {
 }
 
 delBtn.addEventListener("click", () => {
-  if (temp.num1Arr.length > 0 && inputs.operator === null) {
+  if (temp.num1Arr.length > 0 && inputs.operator === null && temp.num2Arr.length === 0) {
     temp.num1Arr.pop();
     updateScreen(temp.num1Arr.length > 0 ? temp.num1Arr.join("") : "0");
-  } else if (temp.num1Arr.length === 0 && temp.num2Arr.length === 0) {
-    updateScreen("0"); 
-  }
+    inputs.firstNumber = temp.num1Arr;
+
+    if (resultSpan.textContent == "0") {
+      inputs.clear();
+      temp.clear();
+    }
+  } else if (temp.num1Arr.length > 0 && inputs.operator != null && temp.operator === null && temp.num2Arr.length === 0) {
+    inputs.operator = null;
+    updateScreen(temp.num1Arr.join(""));
+  } else if (temp.num1Arr.length > 0 && inputs.firstNumber != null && temp.num2Arr.length > 0 && inputs.operator != null) {
+    temp.num2Arr.pop();
+    updateScreen(temp.num1Arr.join("") + inputs.operator + temp.num2Arr.join(""));
+    inputs.secondNumber = temp.num2Arr;
+  } 
+  // Add control statement for deleting temp operator
 });
 
 btnsMainCont.addEventListener("click", (event) => {
@@ -180,6 +192,12 @@ btnsMainCont.addEventListener("click", (event) => {
     console.log(`1st: ${inputs.firstNumber }`);
     
     funcBtnsEnabled = false;
+  }
+
+  if (selected.classList.contains("funct-btn") && temp.num1Arr.length > 0 && temp.num2Arr.length === 0 && inputs.operator === null) {
+    inputs.operator = selected.textContent;
+    updateScreen(inputs.firstNumber + inputs.operator);
+    console.log(`op: ${inputs.operator}`);
   }
 
   if (selected.classList.contains("num") && inputs.firstNumber != null) {
