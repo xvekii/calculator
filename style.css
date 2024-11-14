@@ -34,6 +34,7 @@
   white-space: nowrap;
   padding: 0 3.2px;
   text-shadow: 2px 2px #b3b3b3;
+  user-select: none;
 }
 
 .buttons-main-container {
@@ -62,6 +63,15 @@ button {
   background: #eae7e7;
   border: none;
   box-shadow: 2px 2px #b3b3b3;
+  user-select: none;
+  transition: transform 0.1s ease, box-shadow 0.1s;
+}
+
+button:active {
+  transform: translateY(4px);
+  box-shadow: 0px 0px 0px 1px rgb(0 0 0);
+  background-color: #D3B7F9;
+  outline-offset: 3px;
 }
 
 .ac-btn {

@@ -263,7 +263,7 @@ btnsMainCont.addEventListener("click", (event) => {
     }
 
     if (isFloat(temp.result)) {
-      if (temp.result === Infinity) {
+      if (temp.result === Infinity || Number.isNaN(temp.result)) {
         updateScreen("Hohoho!");
       } else {
         if (temp.result.toString().length > 7) {
