@@ -6,6 +6,7 @@ const decimalBtn = document.querySelector(".decimal");
 const acBtn = document.querySelector(".ac-btn");
 const delBtn = document.querySelector(".del-btn");
 const numBtns = document.querySelectorAll(".num");
+const plusMinusBtn = document.querySelector(".plus-minus");
 
 toggleNumBtns(true);
 let funcBtnsEnabled = false;
@@ -92,6 +93,7 @@ function operate(operator, firstNum, secondNum) {
   if (isFloat(operationResult)) {
     decimalBtn.disabled = false;
   }
+  plusMinusBtn.disabled = false;
   return operationResult;
 }
 
@@ -104,6 +106,7 @@ acBtn.addEventListener("click", () => {
   temp.clear();
   updateScreen("0");
   decimalBtn.disabled = false;
+  plusMinusBtn.disabled = false;
   toggleNumBtns(true);
 });
 
@@ -150,9 +153,11 @@ btnsMainCont.addEventListener("click", (event) => {
 
   if (selected.textContent === "±" && temp.num1Arr.length === 0) {
     temp.num1Arr.push("-");
+    plusMinusBtn.disabled = true;
     updateScreen(temp.num1Arr);
   } else if (selected.textContent === "±" && temp.num2Arr.length === 0) {
     temp.num2Arr.push("-");
+    plusMinusBtn.disabled = true;
     updateScreen(temp.num2Arr);
   }
 
@@ -200,6 +205,7 @@ btnsMainCont.addEventListener("click", (event) => {
     
   } else if (selected.classList.contains("funct-btn") && funcBtnsEnabled == true && inputs.firstNumber === null) {
     decimalBtn.disabled = false;
+    plusMinusBtn.disabled = false;
     
     // Store first number to inputs after clicking funct btn
     inputs.firstNumber = +temp.num1Arr.join("");
@@ -258,7 +264,7 @@ btnsMainCont.addEventListener("click", (event) => {
 
     if (isFloat(temp.result)) {
       if (temp.result === Infinity) {
-        updateScreen("Ho! Ho! Ho!");
+        updateScreen("Hohoho!");
       } else {
         if (temp.result.toString().length > 7) {
           temp.result = Number.parseFloat(temp.result).toPrecision(7);
