@@ -94,6 +94,7 @@ function operate(operator, firstNum, secondNum) {
     decimalBtn.disabled = false;
   }
   plusMinusBtn.disabled = false;
+  delBtn.disabled = true;
   return operationResult;
 }
 
@@ -108,6 +109,7 @@ acBtn.addEventListener("click", () => {
   decimalBtn.disabled = false;
   plusMinusBtn.disabled = false;
   toggleNumBtns(true);
+  delBtn.disabled = false;
 });
 
 funcBtns.forEach(btn => {
@@ -206,6 +208,7 @@ btnsMainCont.addEventListener("click", (event) => {
   } else if (selected.classList.contains("funct-btn") && funcBtnsEnabled == true && inputs.firstNumber === null) {
     decimalBtn.disabled = false;
     plusMinusBtn.disabled = false;
+    delBtn.disabled = false;
     
     // Store first number to inputs after clicking funct btn
     inputs.firstNumber = +temp.num1Arr.join("");
@@ -233,6 +236,7 @@ btnsMainCont.addEventListener("click", (event) => {
   }
 
   if (selected.classList.contains("num") && inputs.firstNumber != null) {
+    delBtn.disabled = false;
     temp.num2Arr.push(selected.textContent);
     updateScreen(inputs.firstNumber + inputs.operator + temp.num2Arr.join(""));
 
@@ -258,6 +262,7 @@ btnsMainCont.addEventListener("click", (event) => {
       updateScreen(inputs.firstNumber + inputs.operator + temp.num2Arr.join(""));
     } else if (selected.classList.contains("equal-btn")) {
       toggleNumBtns(false);
+      delBtn.disabled = true;
       temp.result = operate(inputs.operator, inputs.firstNumber, inputs.secondNumber);
       updateScreen(inputs.firstNumber + temp.operator + temp.num2Arr.join(""));
     }
